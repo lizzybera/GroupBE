@@ -33,14 +33,12 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
-
 export const signinUser = async (req: Request, res: Response) => {
-    try {
-        
-    } catch (error) {
-        res.status(404).json({
-            message: "Error occurred while signing in",
-            data: error.message,
-          });
-    }
-}
+  try {
+  } catch (error) {
+    res.status(404).json({
+      message: "Error occurred while signing in",
+      data: error.message,
+    });
+  }
+};
