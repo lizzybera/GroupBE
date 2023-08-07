@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
+import auth from "./router/authRoute"
 
 
 export const mainApp = (app: Application) => {
@@ -10,5 +11,5 @@ export const mainApp = (app: Application) => {
             message : "Viewing Api"
         })
     })
-
+    app.use("/api/v1", auth)
 }
