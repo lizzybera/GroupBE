@@ -1,5 +1,5 @@
 import express, {Application, Request, Response} from "express";
-import env from "dotenv";
+// import env from "dotenv";
 // import { dbNot } from "./config/dbNot";
 import { mainApp } from "./mainApp";
 import { db } from "./config/db";

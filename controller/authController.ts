@@ -33,12 +33,31 @@ export const registerUser = async (req: any, res: Response) => {
   }
 };
 
-export const signinUser = async (req: Request, res: Response) => {
-  try {
-  } catch (error) {
-    res.status(404).json({
-      message: "Error occurred while signing in",
-      data: error.message,
-    });
-  }
-};
+
+
+export const signinUser = async (req: any, res: Response) => {
+    try {
+      const { email, password } = req.body;
+  
+      const user = await authModel.findOne({ email });
+  
+      if (user) {
+        const checkPassword = await bcrypt.compare(password, user?.password!);
+  
+        if (checkPassword) {
+          return res.status(201).json({
+            message: "user sign in",
+            data: user._id,
+          });
+        } else {
+          res.status(404).json({ message: "password not correct" });
+        }
+      } else {
+        res.status(404).json({ message: "user not found" });
+      }
+    } catch (error) {
+      res.status(404).json({
+        message: "Error while Signing User In",
+      });
+    }
+  };
