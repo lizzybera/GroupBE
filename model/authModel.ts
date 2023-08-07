@@ -14,11 +14,11 @@ const authModel = new mongoose.Schema(
     email: { type: String, unique: true, toLowerCase: true },
     password: { type: String },
     avatar: { type: String },
-    avatarID: { type: String },
+    avatarID: { type: String},
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model<iAuth>("auth", authModel);
+export default mongoose.model<iAuth>("auths", authModel);

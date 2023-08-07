@@ -2,7 +2,11 @@ import express, {Application, Request, Response} from "express";
 // import env from "dotenv";
 // import { dbNot } from "./config/dbNot";
 import { mainApp } from "./mainApp";
+<<<<<<< HEAD
+import  db  from "./config/db";
+=======
 import { db } from "./config/db";
+>>>>>>> 6d425648566d65e29dc308641332902e0735fa73
 // env.config()
 
 const app = express();
@@ -11,7 +15,7 @@ const port: number = 3200;
 
 mainApp(app)
 const Server = app.listen(port, () => {
-
+    db()
     console.log("Connected to Port", port)
     db()
 })
