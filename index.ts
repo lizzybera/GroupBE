@@ -2,6 +2,7 @@ import express, {Application, Request, Response} from "express";
 import env from "dotenv";
 // import { dbNot } from "./config/dbNot";
 import { mainApp } from "./mainApp";
+import { db } from "./config/db";
 // env.config()
 
 const app = express();
@@ -12,6 +13,7 @@ mainApp(app)
 const Server = app.listen(port, () => {
 
     console.log("Connected to Port", port)
+    db()
 })
 
 process.on("uncaughtException", (error) => {
