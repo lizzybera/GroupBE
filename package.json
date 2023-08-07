@@ -19,10 +19,18 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"ts-node-dev --respawn --transpile-only index.ts"
+    "start" : "ts-node-dev --respawn --transpile-only index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizzybera/GroupBE.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lizzybera/GroupBE/issues"
+  },
+  "homepage": "https://github.com/lizzybera/GroupBE#readme",
   "description": ""
 }
