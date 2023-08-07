@@ -9,6 +9,12 @@ export const registerUser = async (req: any, res: Response) => {
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
 
+    if (!req.file || !req.file.path) {
+      res.status(400).json({
+        message: "no file uploaded",
+      });
+    }
+
     const { secure_url, public_id } = await cloudinary.uploader.upload(
       req?.file.path
     );
@@ -26,38 +32,36 @@ export const registerUser = async (req: any, res: Response) => {
       data: user,
     });
   } catch (error) {
-    res.status(404).json({
+    res.status(400).json({
       message: "Error occured while registering user",
-      data: error.message,
+      data: error,
     });
   }
 };
 
-
-
 export const signinUser = async (req: any, res: Response) => {
-    try {
-      const { email, password } = req.body;
-  
-      const user = await authModel.findOne({ email });
-  
-      if (user) {
-        const checkPassword = await bcrypt.compare(password, user?.password!);
-  
-        if (checkPassword) {
-          return res.status(201).json({
-            message: "user sign in",
-            data: user._id,
-          });
-        } else {
-          res.status(404).json({ message: "password not correct" });
-        }
+  try {
+    const { email, password } = req.body;
+
+    const user = await authModel.findOne({ email });
+
+    if (user) {
+      const checkPassword = await bcrypt.compare(password, user?.password!);
+
+      if (checkPassword) {
+        return res.status(201).json({
+          message: "user sign in",
+          data: user._id,
+        });
       } else {
-        res.status(404).json({ message: "user not found" });
+        res.status(404).json({ message: "password not correct" });
       }
-    } catch (error) {
-      res.status(404).json({
-        message: "Error while Signing User In",
-      });
+    } else {
+      res.status(404).json({ message: "user not found" });
     }
-  };
+  } catch (error) {
+    res.status(404).json({
+      message: "Error while Signing User In",
+    });
+  }
+};

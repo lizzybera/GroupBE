@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
-const URL: string = "https://localhost:27017/Group"
+const URL: string = "mongodb://127.0.0.1:27017/Group";
 
-export const db = () =>{
-    mongoose.connect(URL).then(()=>{
-        console.log("connected");
-        
-    })
-}
+ const db = () => {
+  mongoose.connect(URL).then(() => {
+    console.log("connected");
+  });
+};
+
+export default db
