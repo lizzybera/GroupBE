@@ -1,16 +1,27 @@
 import express, { Request, Response } from "express"
 import taskModel from "../model/taskModel"
+import authModel from "../model/authModel"
+import mongoose from "mongoose"
 
 export const createTask = async (req : Request, res : Response) =>{
     try {
-        const {task} = req.body
+        const {authID} = req.params;
+        const {taskName} = req.body
 
-        const tasked = await taskModel.create(task)
+        const user: any = await authModel.findById(authID)
+
+        const tasked: any = await taskModel.create({taskName, user : user})
+
+        user?.tasked?.push( new mongoose.Types.ObjectId(tasked._id!) )
+        user?.save()
 
         res.status(201).json({
             message : "task created sucessfully",
             data : tasked
         })
+
+        console.log(tasked);
+        
     } catch (error) {
         res.status(404).json({
             message : "error creating Task"

@@ -6,6 +6,7 @@ interface iAuth {
   password?: string;
   avatar?: string;
   avatarID?: string;
+  task? : {} []
 }
 
 const authModel = new mongoose.Schema(
@@ -15,6 +16,12 @@ const authModel = new mongoose.Schema(
     password: { type: String },
     avatar: { type: String },
     avatarID: { type: String},
+    task: [
+      {
+      type : mongoose.Types.ObjectId,
+      ref : "tasks"
+    },
+  ],
   },
   {
     timestamps: true,

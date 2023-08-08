@@ -1,23 +1,17 @@
-import express, {Application, Request, Response} from "express";
-// import env from "dotenv";
-// import { dbNot } from "./config/dbNot";
+import express from "express";
+import env from "dotenv";
 import { mainApp } from "./mainApp";
-<<<<<<< HEAD
 import  db  from "./config/db";
-=======
-import { db } from "./config/db";
->>>>>>> 6d425648566d65e29dc308641332902e0735fa73
-// env.config()
+env.config()
 
 const app = express();
-const port: number = 3200;
-// const port: number = parseInt(process.env.APPLICATION_PORT!);
+// const port: number = 3200;
+const port: number = parseInt(process.env.APPLICATION_PORT!);
 
 mainApp(app)
-const Server = app.listen(port, () => {
+const Server = app.listen(process.env.PORT ||port, () => {
     db()
-    console.log("Connected to Port", port)
-    db()
+    console.log(port)
 })
 
 process.on("uncaughtException", (error) => {

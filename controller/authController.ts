@@ -65,3 +65,18 @@ export const signinUser = async (req: any, res: Response) => {
     });
   }
 };
+
+export const viewUser = async (req: Request, res: Response) =>{
+  try {
+    const users = await authModel.find()
+
+    res.status(200).json({
+      message : "viewing users",
+      data : users
+    })
+  } catch (error) {
+    res.status(404).json({
+      message : "cannot view users"
+    })
+  }
+}

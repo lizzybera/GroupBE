@@ -1,15 +1,23 @@
 import mongoose from "mongoose";
 
 interface iTask {
-    task? : string;
+    taskName? : string;
+    user? : {}
 }
 
 interface iTaskData extends iTask, mongoose.Document{}
 
 const taskModel = new mongoose.Schema({
-    task : {
-        type : String
+    taskName : {
+        type : String,
+        unique : true
+      },
+    user : {
+        type : mongoose.Types.ObjectId,
+        ref : "users"
     }
-})
+}, {
+    timestamps: true,
+  })
 
 export default mongoose.model<iTaskData>("tasks", taskModel)

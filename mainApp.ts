@@ -14,5 +14,5 @@ export const mainApp = (app: Application) => {
     })
     app.use("/api/v1", auth)
 
-    app.use("/api/v1/", task)
+    app.use("/api/v1", task)
 }
