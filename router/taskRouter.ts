@@ -5,7 +5,7 @@ const router = Router()
 
 router.route("/view").get(viewTask)
 router.route("/:authID/create").post(createTask)
-router.route("/delete").delete(deleteTask)
-router.route("/update").patch(updateTask)
+router.route("/:authID/:id/delete").delete(deleteTask)
+router.route("/:id/update").patch(updateTask)
 
 export default router

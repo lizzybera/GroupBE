@@ -12,15 +12,15 @@ export const createTask = async (req : Request, res : Response) =>{
 
         const tasked: any = await taskModel.create({taskName, user : user})
 
-        user?.tasked?.push( new mongoose.Types.ObjectId(tasked._id!) )
+        user?.task?.push( new mongoose.Types.ObjectId(tasked._id!) )
         user?.save()
+        console.log(user);
 
         res.status(201).json({
             message : "task created sucessfully",
             data : tasked
         })
 
-        console.log(tasked);
         
     } catch (error) {
         res.status(404).json({
@@ -48,8 +48,16 @@ export const viewTask = async (req : Request, res : Response) =>{
 export const deleteTask = async (req : Request, res : Response) =>{
     try {
 
-        const {id} = req.params
-        const tasked = await taskModel.findByIdAndDelete(id)
+        const {authID, id} = req.params
+        const user: any = await authModel.findById(authID)
+        const tasked : any = await taskModel.findByIdAndDelete(id)
+
+        // const tasked: any = await taskModel.create({taskName, user : user})
+
+        user?.task?.pull( new mongoose.Types.ObjectId(tasked._id!) )
+        user?.save()
+        console.log(user);
+
 
         res.status(201).json({
             message : "task deleted sucessfully",

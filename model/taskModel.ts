@@ -10,7 +10,6 @@ interface iTaskData extends iTask, mongoose.Document{}
 const taskModel = new mongoose.Schema({
     taskName : {
         type : String,
-        unique : true
       },
     user : {
         type : mongoose.Types.ObjectId,
